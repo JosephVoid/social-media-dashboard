@@ -9,10 +9,14 @@ export default function Dashboard() {
           handle: "hanlde",
           icon: "FACEBOOK",
           platform: "Facebook",
-          stats: { Views: 50, Engagement: 45 },
+          statistics: [
+            { key: "Views", value: 45 },
+            { key: "Engagement", value: 50 },
+          ],
         }}
         posts={[
           {
+            id: "1",
             datePosted: "25/09/24",
             likes: 45,
             postCaption: "IntroPost",

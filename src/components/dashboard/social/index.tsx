@@ -7,14 +7,20 @@ import {
   Divider,
   Button,
   Popover,
+  Paper,
+  ListItemIcon,
+  ListItemText,
+  MenuItem,
+  MenuList,
 } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import SocialIcon from "./SocialIcon";
+import SocialIcon from "./social-icon";
 import { Post, SocialCard } from "@/types/types";
-import PostCard from "./PostCard";
+import PostCard from "./post-card";
 import React from "react";
-import CardMenuList from "./CardMenuList";
-
+import AddEditForm from "@/components/shared/forms/add-edit-form";
+import { Edit, Delete } from "@mui/icons-material";
+import Modal from "@/components/shared/modal";
 export default function Social({
   data,
   posts = [],
@@ -22,6 +28,9 @@ export default function Social({
   data: SocialCard;
   posts?: Post[];
 }) {
+  const [modalState, setModalState] = React.useState<
+    "EDIT" | "DELETE" | "NONE"
+  >("NONE");
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
   );
@@ -59,7 +68,37 @@ export default function Social({
                 horizontal: "left",
               }}
             >
-              <CardMenuList />
+              <Paper>
+                <MenuList>
+                  <MenuItem onClick={() => setModalState("EDIT")}>
+                    <ListItemIcon>
+                      <Edit fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText>Edit</ListItemText>
+                  </MenuItem>
+                  <MenuItem onClick={() => setModalState("DELETE")}>
+                    <ListItemIcon>
+                      <Delete fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText>Remove</ListItemText>
+                  </MenuItem>
+                </MenuList>
+                <Modal
+                  open={modalState !== "NONE"}
+                  onClose={() => setModalState("NONE")}
+                  content={
+                    <AddEditForm
+                      formValue={{
+                        handle: data.handle,
+                        platform: data.platform,
+                        information: data.information,
+                        statistics: data.statistics,
+                      }}
+                    />
+                  }
+                  title="Edit Social Media Account"
+                />
+              </Paper>
             </Popover>
           </>
         }
@@ -67,21 +106,24 @@ export default function Social({
         subheader={data.platform}
       />
       <CardContent>
-        <Typography fontWeight={900} display={data.info ? "block" : "none"}>
+        <Typography
+          fontWeight={900}
+          display={data.information ? "block" : "none"}
+        >
           General Info
         </Typography>
-        {Object.entries(data.info ?? []).map(([key, value]) => (
-          <div className="flex justify-between">
-            <Typography>{key}</Typography>
-            <Typography>{value}</Typography>
+        {data.information?.map((info, index) => (
+          <div className="flex justify-between" key={index}>
+            <Typography>{info.key}</Typography>
+            <Typography>{info.value}</Typography>
           </div>
         ))}
-        <Divider className={`my-3 ${data.info ? "" : "hidden"}`} />
+        <Divider className={`my-3 ${data.information ? "" : "hidden"}`} />
         <Typography fontWeight={900}>Statistics</Typography>
-        {Object.entries(data.stats).map(([key, value]) => (
-          <div className="flex justify-between">
-            <Typography>{key}</Typography>
-            <Typography fontWeight={600}>{value}</Typography>
+        {data.statistics.map((stats, index) => (
+          <div className="flex justify-between" key={index}>
+            <Typography>{stats.key}</Typography>
+            <Typography fontWeight={600}>{stats.value}</Typography>
           </div>
         ))}
         <Divider className={`my-3 ${posts.length !== 0 ? "" : "hidden"}`} />
@@ -92,7 +134,7 @@ export default function Social({
           Posts
         </Typography>
         {posts.map((post) => (
-          <PostCard {...post} />
+          <PostCard {...post} key={post.id} />
         ))}
         <div className="text-center">
           <Button size="small">Show More</Button>

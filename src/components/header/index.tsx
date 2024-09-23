@@ -3,6 +3,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import PlusIcon from "@mui/icons-material/Add";
 import Modal from "@/components/shared/modal";
 import React from "react";
+import AddEditForm from "../shared/forms/add-edit-form";
 
 export default function Header() {
   const [modalOpen, setModalOpen] = React.useState<boolean>(false);
@@ -25,8 +26,9 @@ export default function Header() {
       </Button>
       <Modal
         open={modalOpen}
-        content={<p>Add New</p>}
+        content={<AddEditForm />}
         onClose={() => setModalOpen(false)}
+        title="Add New Social Media Account"
       />
     </div>
   );
