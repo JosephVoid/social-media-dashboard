@@ -5,7 +5,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const socialApi = createApi({
   reducerPath: "socialApi",
   baseQuery: fetchBaseQuery(),
-  tagTypes: ["socials"],
+  tagTypes: ["socials", "posts"],
   endpoints: (builder) => ({
     getSocials: builder.query({
       queryFn: async () => {
@@ -13,6 +13,13 @@ export const socialApi = createApi({
         return { data: await mockApi.getSocials() };
       },
       providesTags: ["socials"],
+    }),
+    getRecentPost: builder.query({
+      queryFn: async (id: string) => {
+        // Simulate fetching data
+        return { data: await mockApi.getRecentPost(id) };
+      },
+      providesTags: ["posts"],
     }),
     addNewSocial: builder.mutation({
       queryFn: async (newSocial: SocialCard) => {
@@ -47,4 +54,5 @@ export const {
   useAddNewSocialMutation,
   useRemoveSocialMutation,
   useUpdateSocialMutation,
+  useGetRecentPostQuery,
 } = socialApi;

@@ -1,11 +1,13 @@
-import { SocialCard } from "@/types/types";
+import { Post, SocialCard } from "@/types/types";
 import mock from "./mock.json";
 
 class MockAPI {
   socials: SocialCard[] = [];
+  posts: Post[] = [];
 
   constructor() {
     this.socials = mock.socials as SocialCard[];
+    this.posts = mock.posts as Post[];
   }
 
   async simulateWait() {
@@ -35,6 +37,11 @@ class MockAPI {
   async deleteSocial(id: string) {
     await this.simulateWait();
     this.socials = this.socials.filter((social) => social.id !== id);
+  }
+
+  async getRecentPost(id: string): Promise<Post | undefined> {
+    await this.simulateWait();
+    return this.posts.find((post) => post.postedBy === id);
   }
 }
 

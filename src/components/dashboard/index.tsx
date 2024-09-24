@@ -10,20 +10,7 @@ export default function Dashboard() {
       {isLoading ? (
         <Loader />
       ) : (
-        data?.map((social) => (
-          <Social
-            key={social.id}
-            data={social}
-            posts={[
-              {
-                id: "1",
-                datePosted: "25/09/24",
-                likes: 45,
-                postCaption: "IntroPost",
-              },
-            ]}
-          />
-        ))
+        data?.map((social) => <Social key={social.id} data={social} />)
       )}
     </div>
   );

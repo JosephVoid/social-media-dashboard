@@ -5,7 +5,6 @@ import {
   CardContent,
   Typography,
   Divider,
-  Button,
   Popover,
   Paper,
   ListItemIcon,
@@ -15,21 +14,16 @@ import {
 } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SocialIcon from "./social-icon";
-import { Post, SocialCard } from "@/types/types";
+import { SocialCard } from "@/types/types";
 import PostCard from "./post-card";
 import React from "react";
 import AddEditForm from "@/components/shared/forms/add-edit-form";
 import { Edit, Delete } from "@mui/icons-material";
 import Modal from "@/components/shared/modal";
 import DeleteForm from "@/components/shared/forms/delete-form";
+import { useGetRecentPostQuery } from "@/redux/rtk-query/social-service";
 
-export default function Social({
-  data,
-  posts = [],
-}: {
-  data: SocialCard;
-  posts?: Post[];
-}) {
+export default function Social({ data }: { data: SocialCard }) {
   const [modalState, setModalState] = React.useState<
     "EDIT" | "DELETE" | "NONE"
   >("NONE");
@@ -46,6 +40,8 @@ export default function Social({
   };
 
   const open = Boolean(anchorEl);
+
+  const { data: postData, isLoading } = useGetRecentPostQuery(data.id);
 
   return (
     <Card sx={{ maxWidth: 350 }} className="mr-3">
@@ -144,19 +140,11 @@ export default function Social({
             </Typography>
           </div>
         ))}
-        <Divider className={`my-3 ${posts.length !== 0 ? "" : "hidden"}`} />
-        <Typography
-          fontWeight={900}
-          display={posts.length !== 0 ? "block" : "none"}
-        >
+        <Divider className={`my-3 ${postData ? "" : "hidden"}`} />
+        <Typography fontWeight={900} display={postData ? "block" : "none"}>
           Posts
         </Typography>
-        {posts.map((post) => (
-          <PostCard {...post} key={post.id} />
-        ))}
-        <div className="text-center">
-          <Button size="small">Show More</Button>
-        </div>
+        {!isLoading && postData && <PostCard {...postData} />}
       </CardContent>
     </Card>
   );

@@ -9,7 +9,7 @@ import {
 
 export default function PostCard(data: Post) {
   return (
-    <Card sx={{ maxWidth: 345, marginBottom: 1 }} elevation={0}>
+    <Card sx={{ maxWidth: 250, marginBottom: 1 }} elevation={0}>
       <CardActionArea>
         <CardMedia
           component="img"

@@ -19,6 +19,7 @@ export type SocialCard = {
 
 export type Post = {
   id: string;
+  postedBy: string;
   datePosted: string;
   postImage?: string;
   postCaption: string;
