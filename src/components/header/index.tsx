@@ -22,14 +22,14 @@ export default function Header() {
 
   return (
     <div className="p-3 mb-4">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center flex-col md:flex-row">
         <div className="flex items-center mb-3">
           <HomeIcon sx={{ fontSize: 50, marginRight: 1 }} color="secondary" />
           <Typography variant="h3" color="primary">
             Overview
           </Typography>
         </div>
-        <div>
+        <div className="mb-3">
           <Typography variant="body2" className="mb-2">
             {isSignedIn
               ? `${user.displayName}(${user.username})`

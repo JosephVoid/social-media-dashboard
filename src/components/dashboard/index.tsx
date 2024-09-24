@@ -6,7 +6,7 @@ export default function Dashboard() {
   const { data, isLoading } = useGetSocialsQuery({});
 
   return (
-    <div className="p-3 flex flex-r">
+    <div className="md:p-3 p-0 flex md:flex-row flex-col">
       {isLoading ? (
         <Loader />
       ) : (
