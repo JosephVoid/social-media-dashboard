@@ -29,7 +29,6 @@ export default function AddEditForm({
     removeInfo,
     removeStat,
     platform,
-    formLoading,
   } = useAddEditForm(onComplete, Social);
 
   return (
