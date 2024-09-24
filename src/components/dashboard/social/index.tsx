@@ -21,6 +21,8 @@ import React from "react";
 import AddEditForm from "@/components/shared/forms/add-edit-form";
 import { Edit, Delete } from "@mui/icons-material";
 import Modal from "@/components/shared/modal";
+import DeleteForm from "@/components/shared/forms/delete-form";
+
 export default function Social({
   data,
   posts = [],
@@ -46,7 +48,7 @@ export default function Social({
   const open = Boolean(anchorEl);
 
   return (
-    <Card sx={{ maxWidth: 300 }}>
+    <Card sx={{ maxWidth: 350 }} className="mr-3">
       <CardHeader
         avatar={<SocialIcon social={data.icon} />}
         action={
@@ -87,16 +89,30 @@ export default function Social({
                   open={modalState !== "NONE"}
                   onClose={() => setModalState("NONE")}
                   content={
-                    <AddEditForm
-                      formValue={{
-                        handle: data.handle,
-                        platform: data.platform,
-                        information: data.information,
-                        statistics: data.statistics,
-                      }}
-                    />
+                    modalState === "EDIT" ? (
+                      <AddEditForm
+                        Social={{
+                          id: data.id,
+                          icon: data.icon,
+                          handle: data.handle,
+                          platform: data.platform,
+                          information: data.information,
+                          statistics: data.statistics,
+                        }}
+                        onComplete={() => setModalState("NONE")}
+                      />
+                    ) : (
+                      <DeleteForm
+                        onComplete={() => setModalState("NONE")}
+                        id={data.id}
+                      />
+                    )
                   }
-                  title="Edit Social Media Account"
+                  title={
+                    modalState === "EDIT"
+                      ? "Edit Social Media Account"
+                      : "Delete Social Media Account"
+                  }
                 />
               </Paper>
             </Popover>
@@ -114,16 +130,18 @@ export default function Social({
         </Typography>
         {data.information?.map((info, index) => (
           <div className="flex justify-between" key={index}>
-            <Typography>{info.key}</Typography>
-            <Typography>{info.value}</Typography>
+            <Typography variant="caption">{info.key}</Typography>
+            <Typography variant="caption">{info.value}</Typography>
           </div>
         ))}
         <Divider className={`my-3 ${data.information ? "" : "hidden"}`} />
         <Typography fontWeight={900}>Statistics</Typography>
-        {data.statistics.map((stats, index) => (
+        {data.statistics?.map((stats, index) => (
           <div className="flex justify-between" key={index}>
-            <Typography>{stats.key}</Typography>
-            <Typography fontWeight={600}>{stats.value}</Typography>
+            <Typography variant="caption">{stats.key}</Typography>
+            <Typography variant="caption" fontWeight={600}>
+              {stats.value}
+            </Typography>
           </div>
         ))}
         <Divider className={`my-3 ${posts.length !== 0 ? "" : "hidden"}`} />

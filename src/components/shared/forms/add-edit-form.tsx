@@ -1,4 +1,4 @@
-import { FormValues } from "@/types/types";
+import { SocialCard } from "@/types/types";
 import useAddEditForm from "../hooks/useAddEditForm";
 import {
   Button,
@@ -11,7 +11,13 @@ import {
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircle from "@mui/icons-material/RemoveCircle";
 
-export default function AddEditForm({ formValue }: { formValue?: FormValues }) {
+export default function AddEditForm({
+  Social,
+  onComplete,
+}: {
+  onComplete: () => void;
+  Social?: SocialCard;
+}) {
   const {
     register,
     handleSubmit,
@@ -23,7 +29,8 @@ export default function AddEditForm({ formValue }: { formValue?: FormValues }) {
     removeInfo,
     removeStat,
     platform,
-  } = useAddEditForm(formValue);
+    formLoading,
+  } = useAddEditForm(onComplete, Social);
 
   return (
     <div>
@@ -49,7 +56,7 @@ export default function AddEditForm({ formValue }: { formValue?: FormValues }) {
             >
               <MenuItem value="Facebook">Facebook</MenuItem>
               <MenuItem value="Instagram">Instagram</MenuItem>
-              <MenuItem value="x">X</MenuItem>
+              <MenuItem value="X">X</MenuItem>
               <MenuItem value="LinkedIn">LinkedIn</MenuItem>
               <MenuItem value="YouTube">YouTube</MenuItem>
               <MenuItem value="Reddit">Reddit</MenuItem>

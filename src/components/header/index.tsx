@@ -26,7 +26,7 @@ export default function Header() {
       </Button>
       <Modal
         open={modalOpen}
-        content={<AddEditForm />}
+        content={<AddEditForm onComplete={() => setModalOpen(false)} />}
         onClose={() => setModalOpen(false)}
         title="Add New Social Media Account"
       />

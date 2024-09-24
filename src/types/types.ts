@@ -5,7 +5,7 @@ export type SocialPlatform =
   | "LINKEDIN"
   | "YOUTUBE"
   | "REDDIT"
-  | "TIK TOK"
+  | "TIKTOK"
   | "OTHER";
 
 export type SocialCard = {
@@ -13,7 +13,7 @@ export type SocialCard = {
   icon: SocialPlatform;
   handle: string;
   platform: string;
-  statistics: { key: string; value: number }[];
+  statistics?: { key: string; value: number }[];
   information?: { key: string; value: string }[];
 };
 

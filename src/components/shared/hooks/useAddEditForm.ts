@@ -1,7 +1,20 @@
-import { FormValues } from "@/types/types";
+import {
+  useAddNewSocialMutation,
+  useUpdateSocialMutation,
+} from "@/redux/rtk-query/social-service";
+import { FormValues, SocialCard, SocialPlatform } from "@/types/types";
 import { useFieldArray, useForm } from "react-hook-form";
+import { generateRandomId } from "../utils/utils";
+import { useState } from "react";
 
-export default function useAddEditForm(preset?: FormValues) {
+export default function useAddEditForm(
+  onDone: () => void,
+  preset?: SocialCard
+) {
+  const [addSocial] = useAddNewSocialMutation();
+  const [updateSocial] = useUpdateSocialMutation();
+  const [formLoading, setFormLoading] = useState(false);
+
   const { register, handleSubmit, control, watch } = useForm<FormValues>({
     defaultValues: {
       handle: preset?.handle ?? "",
@@ -11,8 +24,31 @@ export default function useAddEditForm(preset?: FormValues) {
     },
   });
 
-  const onSubmit = (data: FormValues) => {
-    console.log(data);
+  const onSubmit = async (data: FormValues) => {
+    try {
+      if (preset) {
+        // Editing
+        setFormLoading(true);
+        const updatedSocialItem = { ...preset, ...data } as SocialCard;
+        await updateSocial(updatedSocialItem);
+        setFormLoading(false);
+        onDone();
+      } else {
+        // Adding
+        setFormLoading(true);
+        const newSocialItem: SocialCard = {
+          ...data,
+          id: generateRandomId(),
+          icon: data.platform.toUpperCase() as SocialPlatform,
+        };
+        await addSocial(newSocialItem);
+        setFormLoading(false);
+        onDone();
+      }
+    } catch (error) {
+      console.log(data);
+      setFormLoading(false);
+    }
   };
 
   const {
@@ -47,5 +83,6 @@ export default function useAddEditForm(preset?: FormValues) {
     onSubmit,
     register,
     platform,
+    formLoading,
   };
 }

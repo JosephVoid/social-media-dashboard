@@ -1,0 +1,84 @@
+{
+  "socials": [
+    {
+      "id": "12ab",
+      "icon": "FACEBOOK",
+      "handle": "mine_marketing",
+      "platform": "Facebook",
+      "statistics": [
+        {
+          "key": "Views",
+          "value": 50
+        },
+        {
+          "key": "Likes",
+          "value": 23
+        }
+      ],
+      "information": [
+        {
+          "key": "CreatedOn",
+          "value": "25/09/24"
+        },
+        {
+          "key": "Owner",
+          "value": "Mine Marketing"
+        }
+      ]
+    },
+    {
+      "id": "yt12ab",
+      "icon": "X",
+      "handle": "mine_marketing_x",
+      "platform": "X",
+      "statistics": [
+        {
+          "key": "Views",
+          "value": 50
+        },
+        {
+          "key": "Likes",
+          "value": 23
+        }
+      ],
+      "information": [
+        {
+          "key": "CreatedOn",
+          "value": "25/09/24"
+        },
+        {
+          "key": "Owner",
+          "value": "Mine Marketing"
+        }
+      ]
+    }
+  ],
+  "posts": [
+    {
+      "id": "post_1ab",
+      "datePosted": "19/09/24",
+      "postCaption": "We had a great time, last weekend. #good",
+      "likes": 20
+    },
+    {
+      "id": "post_2ab",
+      "datePosted": "20/09/24",
+      "postImage": "https://picsum.photos/200",
+      "postCaption": "Fun Days Ahead #market",
+      "likes": 2
+    },
+    {
+      "id": "post_3ab",
+      "datePosted": "21/09/24",
+      "postImage": "https://picsum.photos/2/picsum/200/300",
+      "postCaption": "Let's gooo!! #market",
+      "likes": 4
+    },
+    {
+      "id": "post_4ab",
+      "datePosted": "23/09/24",
+      "postCaption": "Secoda e had a great time, last weekend. #great",
+      "likes": 25
+    }
+  ]
+}
