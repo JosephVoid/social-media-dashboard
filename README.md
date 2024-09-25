@@ -8,12 +8,35 @@ The codebase is written using the React framework and incorporates Redux Toolkit
 
 ## Getting Started
 
-To view locally do
+To run the application on your machine, you need to have Node.js, npm and Git installed. Then, follow these steps:
 
-1. `npm install`
-2. `npm run dev`
+1. Clone the repository to your local machine using the command:
 
-To view deployed go [here](#)
+   ```
+   git clone https://github.com/JosephVoid/social-media-dashboard.git
+   ```
+
+2. Navigate to the project directory using:
+
+   ```
+   cd social-media-dashboard
+   ```
+
+3. Install the dependencies using the command:
+
+   ```
+   npm install
+   ```
+
+4. Start the development server using the command:
+
+   ```
+   npm run dev
+   ```
+
+   This will run the application on `http://localhost:5173`.
+
+Alternativley, to view a deployed version go [here](https://social-media-dash-mgmt.netlify.app/)
 
 ## Explanation
 
@@ -76,3 +99,10 @@ To view deployed go [here](#)
 
 - **src/types**  
   Contains the types used throughout the application.
+
+### Additional Notes
+
+- In the app you click on "Add Social Media Account" to add an account. You will enter the social handle, the platform, and any amount of information or statistic
+- You can click on the 3 dots on the social card to edit or remove it
+- Posts can't be created they are just fetched from the (simulated) backend, the posts only exist for the first two pre-set accounts.
+- The sign in and signout are there to show global state, the do not authorize anything
