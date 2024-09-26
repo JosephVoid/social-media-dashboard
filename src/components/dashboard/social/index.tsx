@@ -44,7 +44,7 @@ export default function Social({ data }: { data: SocialCard }) {
   const { data: postData, isLoading } = useGetRecentPostQuery(data.id);
 
   return (
-    <Card sx={{ maxWidth: 350 }} className="mr-3 mb-4">
+    <Card sx={{ width: 300 }} className="mr-3 mb-4">
       <CardHeader
         avatar={<SocialIcon social={data.icon} />}
         action={
@@ -141,7 +141,11 @@ export default function Social({ data }: { data: SocialCard }) {
           </div>
         ))}
         <Divider className={`my-3 ${postData ? "" : "hidden"}`} />
-        <Typography fontWeight={900} display={postData ? "block" : "none"}>
+        <Typography
+          fontWeight={900}
+          display={postData ? "block" : "none"}
+          className="mb-1"
+        >
           Recent Post
         </Typography>
         {!isLoading && postData && <PostCard {...postData} />}

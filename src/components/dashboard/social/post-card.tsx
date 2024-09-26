@@ -15,7 +15,7 @@ export default function PostCard(data: Post) {
           component="img"
           height="50px"
           image={data.postImage}
-          className="max-h-28"
+          className="max-h-28 mt-2"
         />
         <CardContent>
           <Typography gutterBottom variant="body2" component="div">
