@@ -36,6 +36,12 @@ To run the application on your machine, you need to have Node.js, npm and Git in
 
    This will run the application on `http://localhost:5173`.
 
+5. (Optional) Run the tests:
+
+   ```
+   npm test
+   ```
+
 Alternativley, to view a deployed version go [here](https://social-media-dash-mgmt.netlify.app/)
 
 ## Explanation
@@ -51,12 +57,15 @@ Alternativley, to view a deployed version go [here](https://social-media-dash-mg
 4. Next, I created an API or backend simulator (inside `src/api/methods.ts`) to mimic the behavior of a server, including a few seconds of delay. It uses the `src/api/mock.json` file to initially load data.
 5. I then installed Redux and created state slices for user data, connecting it with the UI to add the functionality of signing in and signing out.
 6. Finally, I created API endpoints with RTK Query, wrapped the backend methods with it, and exported them as hooks for the UI to use.
+7. Wrote test for the simulated backend and the reducers in the store
 
 ### Tools
 
 - **React**: A JavaScript library for building user interfaces, especially for single-page applications.
 
 - **Vite**: A fast build tool and development server for modern web projects, optimized for speed and performance.
+
+- **Vitest**: A testing tool for the vite build system.
 
 - **Tailwind**: A utility-first CSS framework for building custom designs quickly without writing custom CSS.
 
@@ -99,6 +108,9 @@ Alternativley, to view a deployed version go [here](https://social-media-dash-mg
 
 - **src/types**  
   Contains the types used throughout the application.
+
+- **src/tests**
+  Contains test files for the simulated backend and the store reducers
 
 ### Additional Notes
 
